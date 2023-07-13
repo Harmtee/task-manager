@@ -13,7 +13,7 @@
     <div class="row">
 
         <div class="col-sm-6 form-group">
-            <form action="" method="get">
+            {{-- <form action="" method="get">
                 <select class="form-control my-2" name="project" id="project_id" onchange="$(this).closest('form').submit()">
                     <option value="">Select project</option>
                     @foreach ($projects as $project)
@@ -21,7 +21,7 @@
                             {{ $project }}</option>
                     @endforeach
                 </select>
-            </form>
+            </form> --}}
         </div>
         <div class="col-sm-6 clearfix my-2">
             <button type="button" class="float-right btn btn-primary btn-sm ml-3" data-toggle="modal"
