@@ -184,18 +184,22 @@
     </script>
 
     <script>
-        function deleteTask() {
-            var taskId = $(this).data('task-id');
+        function deleteTask(e) {
+            var taskId = $(e.target).data('task-id');
+            console.log('taskId', taskId)
             // Send the AJAX request to delete the task
             $.ajax({
-                url: "{{ route('tasks.destroy') }}/" + taskId,
+                url: "{{ route('tasks.destroy') }}/"+ taskId,
                 type: 'DELETE',
+                contentType: 'application/json', // Set content type to JSON
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response, status) {
-                    if (status == 'success' && response == 1) {
+                    if (status == 'success' && response.status == 'success') {
                         $('#task-' + taskId).remove()
+                    } else {
+                        alert('Unable to delete')
                     }
                 },
                 error: function(xhr, status, error) {

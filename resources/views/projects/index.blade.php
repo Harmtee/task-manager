@@ -128,19 +128,18 @@
             })
         }
         function deleteProject(e) {
-            var projectId = $(this).data('project-id');
+            var projectId = $(e.target).data('project-id');
             $.ajax({
-                url: "{{ route('projects.destroy') }}/",
-                type: 'DELETE',
-                data: {
-                    project_id: projectId
-                },
+                url: "{{ route('projects.destroy') }}/" + projectId,
+                type: 'DELETE',                
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response, status) {
-                    if (status == 'success' && response == 1) {
+                    if (status == 'success' && response.status == 'success') {
                         $('#project-' + projectId).remove()
+                    } else {
+                        alert('Unable to delete')
                     }
                 },
                 error: function(xhr, status, error) {

@@ -85,16 +85,15 @@ class ProjectController extends Controller
      * Remove the specified project from storage.
      *
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Project $project)
     {
-        $project = Project::find($request->project_id);
         try {
             $project->delete();
-            return response(['status' => 'success']);
+            return response(['status' => 'success', 'message' => 'Deleted']);
         } catch (\Throwable $th) {
-            return response(['status' => 'Unable to delete project']);
+            return response(['status' => '', 'message' => 'Unable to delete project']);
         }
     }
 }
